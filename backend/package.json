@@ -2,6 +2,7 @@
   "name": "lessonarnob",
   "version": "1.0.0",
   "description": "Hello",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server",
@@ -11,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
-    
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

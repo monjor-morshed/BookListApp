@@ -1,40 +1,22 @@
-import express, { response } from "express";
-import { request } from "http";
+import express from "express";
 
 
-import Path from "path";
-import { PORT, mongodbURL } from "../backend/config.js";
+import { PORT, mongodbURL } from "./config.js";
 import mongoose from 'mongoose';
-import { Book } from "../backend/models/bookModel.js";
-import { title } from "process";
+import cors from 'cors'
+import booksRoute from "./routes/booksRoute.js"; // Corrected path
+
 const app = express();
-app.use(express.json({ extended: false }));
+app.use(express.json());
+
+app.use(cors())
+
 app.get('/', (request ,response) => {
     return response.status(234).send("Welcome Homies")
 });
 
-app.post('/books', async (request, response) =>{
-    try{
-        if(
-            !request.body.title ||
-            !request.body.author ||
-            !request.body.publishYear
-        ){
-            return response.status(400).send({
-                message: "Send all required fields"
-            })
-        }
-        const newBook = {
-            title: request.body.title,
-            author: request.body.author,
-            publishYear: request.body.publishYear
-        };
-        const book = await Book.create(newBook);
-    } catch(error){
-        console.log(error.message);
-        response.status(500).send({message: error.message});
-    };
-});
+app.use('/books', booksRoute);
+
 mongoose
     .connect(mongodbURL)
     .then(() => {

@@ -4,7 +4,7 @@ import express from "express";
 import { PORT, mongodbURL } from "./config.js";
 import mongoose from 'mongoose';
 import cors from 'cors'
-import booksRoute from "./routes/booksRoute.js"; // Corrected path
+import booksRoute from "./routes/booksRoute.js";
 
 const app = express();
 app.use(express.json());
